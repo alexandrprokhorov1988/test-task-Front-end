@@ -3,8 +3,8 @@ import './CustomerForm.css';
 import {NavLink, Route, useHistory, useRouteMatch} from 'react-router-dom';
 import {useFormValidation} from '../../hooks/useFormValidation';
 
-function CustomerForm(props) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
+function CustomerForm({ onSubmit, onGeolocation }) {
+  const { values, handleChange, errors, isValid, resetForm, handleAdd } = useFormValidation();
   const { path, url } = useRouteMatch();
   const history = useHistory();
 
@@ -12,9 +12,19 @@ function CustomerForm(props) {
     resetForm();
   }, [resetForm]);
 
+  function handleClick() {
+    onGeolocation()
+      .then((res) => {
+        handleAdd('city', res.address.state);
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  }
+
   console.log(values);
   return (
-    <form action="#" method="post" className="form" noValidate onSubmit={props.onSubmit}>
+    <form action="#" method="post" className="form" noValidate onSubmit={onSubmit}>
       <nav className="form__nav">
         <ul className="form__links">
           <li className="form__list">
@@ -87,15 +97,22 @@ function CustomerForm(props) {
               value={values.additionalInfo || ''}
               onChange={handleChange}
             />
-            <input
-              type="text"
-              name="city"
-              className="form__input form__input_top-margin-h"
-              placeholder="City"
-              required
-              value={values.city || ''}
-              onChange={handleChange}
-            />
+            <div className="form__input-container form__input-container_type_inputs">
+              <input
+                type="text"
+                name="city"
+                className="form__input"
+                placeholder="City"
+                required
+                value={values.city || ''}
+                onChange={handleChange}
+              />
+              <button
+                type="button"
+                className="form__button-inside-input"
+                onClick={handleClick}
+              />
+            </div>
             <div className="form__input-container form__input-container_type_inputs">
               <select className="form__select" name="country" value={values.country || 'Country'}
                       onChange={handleChange}>
@@ -356,15 +373,17 @@ function CustomerForm(props) {
           </label>
 
 
-          <button onClick={() => {
-            history.push(`${path}/billing`)
-          }}>Continue
+          <button
+            className="form__button"
+            onClick={() => {
+              history.push(`${path}/billing`)
+            }}>Continue
           </button>
         </div>
       </Route>
       <Route path={`${path}/billing`}>
         <div className='form__input-container'>
-          <button onClick={() => {
+          <button type="button" onClick={() => {
             history.push(`${path}/payment`)
           }}>Continue
           </button>

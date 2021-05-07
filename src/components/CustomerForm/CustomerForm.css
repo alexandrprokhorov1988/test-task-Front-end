@@ -79,7 +79,6 @@
   line-height: 18px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 6px;
 }
 
 .form__input {
@@ -91,16 +90,21 @@
   border: 1px solid #DEDCDC;
   border-radius: 5px;
   box-sizing: border-box;
+  width: 100%;
 }
-.form__input_top-margin-l{
+
+.form__input_top-margin-l {
   margin-top: 6px;
 }
-.form__input_top-margin-m{
+
+.form__input_top-margin-m {
   margin-top: 10px;
 }
-.form__input_top-margin-h{
+
+.form__input_top-margin-h {
   margin-top: 20px;
 }
+
 .form__input-container {
   display: flex;
   flex-direction: row;
@@ -114,11 +118,7 @@
 .form__input-container_type_inputs {
   justify-content: space-between;
   padding-top: 20px;
-
-}
-
-.form__input_type_tel {
-
+  position: relative;
 }
 
 .form__input_type_zip {
@@ -137,4 +137,37 @@
 
 .form__select {
   max-width: 180px;
+}
+
+.form__button {
+  max-width: 180px;
+  background-color: rgba(90, 16, 148, 0.8);
+  font-size: 16px;
+  line-height: 19px;
+  color: #FFFFFF;
+  height: 45px;
+  width: 100%;
+  border: 1px solid #431C5D;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all ease .5s;
+}
+
+.form__button:hover {
+  background-color: #431C5D;
+}
+
+.form__button-inside-input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background-image: url(../../images/geolocation.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 50%;
+  right: 12px;
 }
