@@ -2,18 +2,20 @@ import React from 'react';
 import './App.css';
 import {Redirect, Route, Switch, useHistory} from 'react-router-dom';
 import Cart from '../../components/Cart/Cart';
+import Header from '../../components/Header/Header';
 import locationIqApi from '../../utils/LocationIqApi';
 import {CurrentUserContext} from '../../contexts/CurrentUserContext';
+import {data} from "../../utils/data";
 
 function App() {
   const [orderComplete, setOrderComplete] = React.useState(false);
-  const [currentUser, setCurrentUser] = React.useState({
-    name: '',
-    about: '',
-    avatar: null
-  });
-
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [cart, setCart] = React.useState([]);
   const history = useHistory();
+
+  React.useEffect(() => {
+    setCart(data);
+  }, [data]);
 
   function handleSubmit(values) {
     setCurrentUser(values);
@@ -53,8 +55,9 @@ function App() {
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <header className="App-header">
-        </header>
+        <Header
+          cart={cart}
+        />
         <main className="content">
           <Switch>
             <Route path="/cart">
@@ -63,6 +66,7 @@ function App() {
                 orderComplete={orderComplete}
                 onGeolocation={getCityFromGeolocation}
                 onHandlePrint={handlePrint}
+                cart={cart}
               />
             </Route>
             <Route path="*">

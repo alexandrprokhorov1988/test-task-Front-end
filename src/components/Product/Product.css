@@ -1,0 +1,31 @@
+.product {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product__img {
+
+}
+
+.product__container {
+
+}
+
+.product__title {
+
+}
+
+.product__text {
+
+}
+
+.product__text {
+
+}
+
+.product__price {
+
+}

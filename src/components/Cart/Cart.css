@@ -2,9 +2,10 @@
   margin: 0 auto;
   max-width: 700px;
   width: 100%;
-  min-height: 579px;
+  min-height: 589px;
   display: grid;
   grid-template-columns: auto auto;
   border: 1px solid red;
   box-sizing: border-box;
+  margin-top: 45px;
 }
