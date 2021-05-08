@@ -3,12 +3,14 @@ import './Cart.css';
 import CustomerForm from '../../components/CustomerForm/CustomerForm';
 import OrderInfo from '../../components/OrderInfo/OrderInfo';
 
-function Cart({ onSubmit, orderComplete, onGeolocation, city }) {
+function Cart({ onSubmit, orderComplete, onGeolocation, city, onHandlePrint }) {
 
   return (
     <section className="cart">
       {orderComplete ?
-        <OrderInfo/> :
+        <OrderInfo
+          onHandlePrint={onHandlePrint}
+        /> :
         <CustomerForm
           onSubmit={onSubmit}
           onGeolocation={onGeolocation}

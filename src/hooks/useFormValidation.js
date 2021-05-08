@@ -14,8 +14,12 @@ export const useFormValidation = () => {
     setIsValid(target.closest("form").checkValidity());
   };
 
-  const handleAdd = (name, value) => {
-    setValues({ ...values, [name]: value });
+  const handleChangeValues = (obj) => {
+    setValues({ ...values, ...obj });
+  };
+
+  const handleChangeErrors = (obj) => {
+    setErrors({ ...errors, ...obj });
   };
 
   const resetForm = useCallback(
@@ -27,5 +31,5 @@ export const useFormValidation = () => {
     [setValues, setErrors, setIsValid]
   );
 
-  return { values, handleChange, errors, isValid, resetForm, handleAdd };
+  return { values, handleChange, errors, isValid, resetForm, handleChangeValues, handleChangeErrors };
 };

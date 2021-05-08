@@ -4,7 +4,7 @@ import {NavLink, Route, useHistory, useRouteMatch} from 'react-router-dom';
 import {useFormValidation} from '../../hooks/useFormValidation';
 
 function CustomerForm({ onSubmit, onGeolocation }) {
-  const { values, handleChange, errors, isValid, resetForm, handleAdd } = useFormValidation();
+  const { values, handleChange, errors, isValid, resetForm, handleChangeValues, handleChangeErrors } = useFormValidation();
   const { path, url } = useRouteMatch();
   const history = useHistory();
 
@@ -12,10 +12,17 @@ function CustomerForm({ onSubmit, onGeolocation }) {
     resetForm();
   }, [resetForm]);
 
+
   function handleClick(type) {
     onGeolocation()
       .then((res) => {
-        handleAdd(type, res.address.state);
+        handleChangeValues({
+            [type]: res.address.state
+          }
+        );
+        handleChangeErrors({
+          [type]: ''
+        });
       })
       .catch((err) => {
         console.log(err)
@@ -23,20 +30,27 @@ function CustomerForm({ onSubmit, onGeolocation }) {
   }
 
   function handlePastSameInfo() {
-    handleAdd('billingCity', values.city);
-    handleAdd('billingName', values.name);
-    handleAdd('billingAddress', values.address);
-    handleAdd('billingAdditionalInfo', values.additionalInfo);
-    handleAdd('billingCountry', values.country);
-    handleAdd('billingZip', values.zip);
-    handleAdd('billingCountry', values.country);
-    handleAdd('billingCity', values.city);
+    handleChangeValues({
+      'billingCity': values.city,
+      'billingName': values.name,
+      'billingAddress': values.address,
+      'billingAdditionalInfo': values.additionalInfo,
+      'billingCountry': values.country,
+      'billingZip': values.zip,
 
+    });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onSubmit(values);
   }
 
   console.log(values);
+  console.log(errors);
+
   return (
-    <form action="#" method="post" className="form" noValidate onSubmit={onSubmit}>
+    <form action="#" method="post" className="form" noValidate onSubmit={handleSubmit}>
       <nav className="form__nav">
         <ul className="form__links">
           <li className="form__list">
@@ -62,65 +76,97 @@ function CustomerForm({ onSubmit, onGeolocation }) {
           </li>
         </ul>
       </nav>
+
       <Route path={`${path}/shipping`}>
         <h2 className="form__title">Shipping Info</h2>
         <div className="form__page-container">
           <label className="form__label">Recipient
-            <input
-              type="text"
-              name="name"
-              className="form__input form__input_top-margin-l"
-              placeholder="Full Name"
-              required
-              value={values.name || ''}
-              onChange={handleChange}
-            />
-            <div className="form__input-container form__input-container_type_text">
+            <div className="form__input-err-container">
+              <span className={`form__error ${!errors.name ? 'form__error_hide' : ''}`}>{errors.name || ''}</span>
               <input
-                type="tel"
-                name="tel"
-                className="form__input"
-                placeholder="Daytime Phone"
+                type="text"
+                name="name"
+                className="form__input form__input_top-margin-l"
+                placeholder="Full Name"
                 required
-                value={values.tel || ''}
+                minLength="2"
+                maxLength="200"
+                pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s]+$"
+                value={values.name || ''}
                 onChange={handleChange}
               />
+            </div>
+            <div className="form__input-container form__input-container_type_text">
+              <div className="form__input-err-container">
+                <span className={`form__error ${!errors.tel ? 'form__error_hide' : ''}`}>{errors.tel || ''}</span>
+                <input
+                  type="tel"
+                  name="tel"
+                  className="form__input"
+                  placeholder="Daytime Phone"
+                  required
+                  minLength="2"
+                  maxLength="200"
+                  pattern="^\d+$"
+                  value={values.tel || ''}
+                  onChange={handleChange}
+                />
+              </div>
               <p className="form__input-description">For delivery questions only</p>
             </div>
           </label>
           <label className="form__label">Address
-            <input
-              type="text"
-              name="address"
-              className="form__input form__input_top-margin-l"
-              placeholder="Street Address"
-              required
-              value={values.address || ''}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="additionalInfo"
-              className="form__input form__input_top-margin-m"
-              placeholder="Apt, Suite, Bldg, Gate Code. (optional)"
-              value={values.additionalInfo || ''}
-              onChange={handleChange}
-            />
-            <div className="form__input-container form__input-container_type_inputs">
+            <div className="form__input-err-container">
+              <span className={`form__error ${!errors.address ? 'form__error_hide' : ''}`}>{errors.address || ''}</span>
               <input
                 type="text"
-                name="city"
-                className="form__input form__input_type_city"
-                placeholder="City"
+                name="address"
+                className="form__input form__input_top-margin-l"
+                placeholder="Street Address"
                 required
-                value={values.city || ''}
+                minLength="2"
+                maxLength="200"
+                pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s]+$"
+                value={values.address || ''}
                 onChange={handleChange}
               />
-              <button
-                type="button"
-                className="form__button-inside-input"
-                onClick={() => handleClick('city')}
+            </div>
+            <div className="form__input-err-container">
+              <span
+                className={`form__error ${!errors.additionalInfo ? 'form__error_hide' : ''}`}>{errors.additionalInfo || ''}</span>
+              <input
+                type="text"
+                name="additionalInfo"
+                className="form__input form__input_top-margin-m"
+                placeholder="Apt, Suite, Bldg, Gate Code. (optional)"
+                minLength="2"
+                maxLength="200"
+                pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s,\.]+$"
+                value={values.additionalInfo || ''}
+                onChange={handleChange}
               />
+            </div>
+            <div className="form__input-err-container">
+              <span className={`form__error ${!errors.city ? 'form__error_hide' : ''}`}>{errors.city || ''}</span>
+              <div className="form__input-container form__input-container_type_inputs">
+                <input
+                  type="text"
+                  name="city"
+                  className="form__input form__input_type_city"
+                  placeholder="City"
+                  required
+                  minLength="2"
+                  maxLength="200"
+                  pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s,\.]+$"
+                  value={values.city || ''}
+                  onChange={handleChange}
+                />
+                <button
+                  type="button"
+                  className="form__button-inside-input"
+                  onClick={() => handleClick('city')}
+                />
+              </div>
             </div>
             <div className="form__input-container form__input-container_type_inputs">
               <select
@@ -397,82 +443,123 @@ function CustomerForm({ onSubmit, onGeolocation }) {
                 <option className="form__option" value="Zambia">Zambia</option>
                 <option className="form__option" value="Zimbabwe">Zimbabwe</option>
               </select>
-              <input
-                type="number"
-                name="zip"
-                className="form__input form__input_type_zip"
-                placeholder="ZIP"
-                required
-                value={values.zip || ''}
-                onChange={handleChange}
-              />
+              <div className="form__input-err-container">
+                <span className={`form__error ${!errors.zip ? 'form__error_hide' : ''}`}>{errors.zip || ''}</span>
+                <input
+                  type="number"
+                  name="zip"
+                  className="form__input form__input_type_zip"
+                  placeholder="ZIP"
+                  required
+                  pattern="^\d+$"
+                  value={values.zip || ''}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
           </label>
           <button
+            type="button"
             className="form__button"
+            disabled={!isValid}
             onClick={() => {
               history.push(`${path}/billing`)
             }}>Continue
           </button>
         </div>
       </Route>
+
       <Route path={`${path}/billing`}>
-        <h2 className="form__title">Billing Information</h2>
-        <button
-          type="button"
-          className="form__button-same"
-          onClick={handlePastSameInfo}
-        >Same as shipping
-        </button>
+        <div className="form__title-container">
+          <h2 className="form__title">Billing Information</h2>
+          <button
+            type="button"
+            className="form__button-same"
+            onClick={handlePastSameInfo}
+          >Same as shipping
+          </button>
+        </div>
         <div className="form__page-container">
           <label className="form__label">Billing Contact
-            <input
-              type="text"
-              name="billingName"
-              className="form__input form__input_top-margin-l"
-              placeholder="Full Name"
-              required
-              value={values.billingName || ''}
-              onChange={handleChange}
-            />
-            <input
-              type="email"
-              name="billingEmail"
-              className="form__input form__input_top-margin-m"
-              placeholder="Email Address"
-              required
-              value={values.billingEmail || ''}
-              onChange={handleChange}
-            />
-          </label>
-          <label className="form__label">Billing Address
-            <input
-              type="text"
-              name="billingAddress"
-              className="form__input form__input_top-margin-l"
-              placeholder="Street Address"
-              required
-              value={values.billingAddress || ''}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="billingAdditionalInfo"
-              className="form__input form__input_top-margin-m"
-              placeholder="Apt, Suite, Bldg, Gate Code. (optional)"
-              value={values.billingAdditionalInfo || ''}
-              onChange={handleChange}
-            />
-            <div className="form__input-container form__input-container_type_inputs">
+            <div className="form__input-err-container">
+              <span
+                className={`form__error ${!errors.billingName ? 'form__error_hide' : ''}`}>{errors.billingName || ''}</span>
               <input
                 type="text"
-                name="billingCity"
-                className="form__input form__input_type_city"
-                placeholder="City"
+                name="billingName"
+                className="form__input form__input_top-margin-l"
+                placeholder="Full Name"
                 required
-                value={values.billingCity || ''}
+                minLength="2"
+                maxLength="200"
+                pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s]+$"
+                value={values.billingName || ''}
                 onChange={handleChange}
               />
+            </div>
+            <div className="form__input-err-container">
+              <span
+                className={`form__error ${!errors.billingEmail ? 'form__error_hide' : ''}`}>{errors.billingEmail || ''}</span>
+              <input
+                type="email"
+                name="billingEmail"
+                className="form__input form__input_top-margin-m"
+                placeholder="Email Address"
+                required
+                value={values.billingEmail || ''}
+                onChange={handleChange}
+              />
+            </div>
+          </label>
+          <label className="form__label">Billing Address
+            <div className="form__input-err-container">
+              <span
+                className={`form__error ${!errors.billingAddress ? 'form__error_hide' : ''}`}>{errors.billingAddress || ''}</span>
+              <input
+                type="text"
+                name="billingAddress"
+                className="form__input form__input_top-margin-l"
+                placeholder="Street Address"
+                required
+                minLength="2"
+                maxLength="200"
+                pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s]+$"
+                value={values.billingAddress || ''}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form__input-err-container">
+              <span
+                className={`form__error ${!errors.billingAdditionalInfo ? 'form__error_hide' : ''}`}>{errors.billingAdditionalInfo || ''}</span>
+              <input
+                type="text"
+                name="billingAdditionalInfo"
+                minLength="2"
+                maxLength="200"
+                pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s]+$"
+                className="form__input form__input_top-margin-m"
+                placeholder="Apt, Suite, Bldg, Gate Code. (optional)"
+                value={values.billingAdditionalInfo || ''}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form__input-container form__input-container_type_inputs">
+              <div className="form__input-err-container">
+                <span
+                  className={`form__error ${!errors.billingCity ? 'form__error_hide' : ''}`}>{errors.billingCity || ''}</span>
+                <input
+                  type="text"
+                  name="billingCity"
+                  className="form__input form__input_type_city"
+                  placeholder="City"
+                  required
+                  minLength="2"
+                  maxLength="200"
+                  pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s]+$"
+                  value={values.billingCity || ''}
+                  onChange={handleChange}
+                />
+              </div>
               <button
                 type="button"
                 className="form__button-inside-input"
@@ -754,20 +841,26 @@ function CustomerForm({ onSubmit, onGeolocation }) {
                 <option className="form__option" value="Zambia">Zambia</option>
                 <option className="form__option" value="Zimbabwe">Zimbabwe</option>
               </select>
-              <input
-                type="number"
-                name="billingZip"
-                className="form__input form__input_type_zip"
-                placeholder="ZIP"
-                required
-                value={values.billingZip || ''}
-                onChange={handleChange}
-              />
+              <div className="form__input-err-container">
+                <span
+                  className={`form__error ${!errors.billingZip ? 'form__error_hide' : ''}`}>{errors.billingZip || ''}</span>
+                <input
+                  type="number"
+                  name="billingZip"
+                  className="form__input form__input_type_zip"
+                  placeholder="ZIP"
+                  required
+                  pattern="^\d+$"
+                  value={values.billingZip || ''}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
           </label>
           <button
             className="form__button"
             type="button"
+            disabled={!isValid}
             onClick={() => {
               history.push(`${path}/payment`)
             }}>Continue
@@ -775,11 +868,92 @@ function CustomerForm({ onSubmit, onGeolocation }) {
         </div>
       </Route>
       <Route path={`${path}/payment`}>
-        <div className='form__input-container'>
-          <button>Pay Securely</button>
-          <p>payment</p>
+        <h2 className="form__title">Payment</h2>
+        <p className="form__subtitle">This is a secure 128-bit SSL encrypted payment</p>
+        <div className='form__page-container'>
+          <label className="form__label">Cardholder Name
+            <div className="form__input-err-container">
+              <span
+                className={`form__error ${!errors.cardHolderName ? 'form__error_hide' : ''}`}>{errors.cardHolderName || ''}</span>
+              <input
+                type="text"
+                name="cardHolderName"
+                className="form__input form__input_top-margin-l"
+                placeholder="Name as it appears on your card"
+                required
+                minLength="2"
+                maxLength="200"
+                pattern="^[а-яёА-ЯЁa-zA-Z\s]+$"
+                value={values.cardHolderName || ''}
+                onChange={handleChange}
+              />
+            </div>
+          </label>
+          <label className="form__label">Card Number
+            <div className="form__input-err-container">
+              <span
+                className={`form__error ${!errors.cardNumber ? 'form__error_hide' : ''}`}>{errors.cardNumber || ''}</span>
+              <input
+                type="number"
+                name="cardNumber"
+                className="form__input form__input_top-margin-l"
+                placeholder="XXXX XXXX XXXX XXXX XXXX"
+                required
+                minLength="2"
+                maxLength="25"
+                pattern="^\d+$"
+                value={values.cardNumber || ''}
+                onChange={handleChange}
+              />
+            </div>
+          </label>
+          <div className="form__input-container">
+            <label className="form__label">Expire Date
+              <div className="form__input-err-container">
+                <span
+                  className={`form__error ${!errors.cardExpiresDate ? 'form__error_hide' : ''}`}>{errors.cardExpiresDate || ''}</span>
+                <input
+                  type="text"
+                  name="cardExpiresDate"
+                  className="form__input form__input_top-margin-l form__input_width_l form__input_right-margin_l"
+                  placeholder="MM / YY"
+                  required
+                  minLength="2"
+                  maxLength="25"
+                  pattern="^[\d\/]+$"
+                  value={values.cardExpiresDate || ''}
+                  onChange={handleChange}
+                />
+              </div>
+            </label>
+            <label className="form__label">Security Code
+              <div className="form__input-err-container">
+                <span
+                  className={`form__error ${!errors.securityCode ? 'form__error_hide' : ''}`}>{errors.securityCode || ''}</span>
+                <input
+                  type="text"
+                  name="securityCode"
+                  className="form__input form__input_top-margin-l form__input_width_l"
+                  required
+                  value={values.securityCode || ''}
+                  onChange={handleChange}
+                />
+              </div>
+            </label>
+          </div>
+
+
+          <button
+            type="submit"
+            disabled={!isValid}
+            className="form__button"
+            name="submit"
+          >Pay Securely
+          </button>
         </div>
       </Route>
+
+
     </form>
   )
 }
