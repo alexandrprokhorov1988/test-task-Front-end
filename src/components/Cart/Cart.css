@@ -4,8 +4,27 @@
   width: 100%;
   min-height: 589px;
   display: grid;
-  grid-template-columns: auto auto;
-  border: 1px solid red;
+  grid-template-columns: minmax(290px, 400px) minmax(220px, 300px);
   box-sizing: border-box;
   margin-top: 45px;
+  grid-template-areas: 'customer-form products';
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: #FFFFFF;
+}
+
+@media print {
+  .cart {
+    grid-template-columns: auto;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .cart {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 'products' 'customer-form';
+    grid-row-gap: 50px;
+    padding-bottom: 20px;
+  }
 }

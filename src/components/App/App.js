@@ -1,26 +1,29 @@
 import React from 'react';
 import './App.css';
-import {Redirect, Route, Switch, useHistory} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import Cart from '../../components/Cart/Cart';
 import Header from '../../components/Header/Header';
 import locationIqApi from '../../utils/LocationIqApi';
 import {CurrentUserContext} from '../../contexts/CurrentUserContext';
-import {data} from "../../utils/data";
+import {cart as cartData, country} from "../../utils/data";
 
 function App() {
   const [orderComplete, setOrderComplete] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [cart, setCart] = React.useState([]);
-  const history = useHistory();
+  const [formValid, setFormValid] = React.useState({
+    'shipping': false,
+    'billing': false,
+  });
+
+  console.log(currentUser);
 
   React.useEffect(() => {
-    setCart(data);
-  }, [data]);
+    setCart(cartData);
+  }, [cartData]);
 
-  function handleSubmit(values) {
-    setCurrentUser(values);
-    setOrderComplete(true);
-    history.push('/cart/print');
+  function handleSubmitSingleForm(values) {
+    setCurrentUser({ ...currentUser, ...values });
   }
 
   function getCoords() {
@@ -52,6 +55,14 @@ function App() {
     window.print();
   }
 
+  function handleComplete() {
+    setOrderComplete(true);
+  }
+
+  function handleSetValid(obj) {
+    setFormValid({ ...formValid, ...obj });
+  }
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -62,11 +73,15 @@ function App() {
           <Switch>
             <Route path="/cart">
               <Cart
-                onSubmit={handleSubmit}
+                onOrderComplete={handleComplete}
                 orderComplete={orderComplete}
                 onGeolocation={getCityFromGeolocation}
                 onHandlePrint={handlePrint}
                 cart={cart}
+                data={country}
+                onSingleFormSubmit={handleSubmitSingleForm}
+                formValid={formValid}
+                onHandleValid={handleSetValid}
               />
             </Route>
             <Route path="*">

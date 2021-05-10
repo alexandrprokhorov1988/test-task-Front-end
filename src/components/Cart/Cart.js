@@ -4,7 +4,7 @@ import CustomerForm from '../../components/CustomerForm/CustomerForm';
 import OrderInfo from '../../components/OrderInfo/OrderInfo';
 import Products from '../../components/Products/Products';
 
-function Cart({ onSubmit, orderComplete, onGeolocation, onHandlePrint, cart }) {
+function Cart({ onSubmit, orderComplete, onOrderComplete, onHandleValid, formValid, onGeolocation, onHandlePrint, cart, data, onSingleFormSubmit }) {
 
   return (
     <section className="cart">
@@ -12,16 +12,20 @@ function Cart({ onSubmit, orderComplete, onGeolocation, onHandlePrint, cart }) {
         <OrderInfo
           onHandlePrint={onHandlePrint}
         /> :
-        <>
-          <CustomerForm
-            onSubmit={onSubmit}
-            onGeolocation={onGeolocation}
-          />
-          <Products
-            cart={cart}
-          />
-        </>
+        <CustomerForm
+          onSubmit={onSubmit}
+          onOrderComplete={onOrderComplete}
+          onHandleValid={onHandleValid}
+          onGeolocation={onGeolocation}
+          formValid={formValid}
+          data={data}
+          onSingleFormSubmit={onSingleFormSubmit}
+        />
       }
+      <Products
+        orderComplete={orderComplete}
+        cart={cart}
+      />
     </section>
   )
 }

@@ -74,6 +74,10 @@
     color: black;
   }
 
+  .order-info {
+    max-width: 100%;
+  }
+
   .order-info__print-button {
     display: none;
   }
