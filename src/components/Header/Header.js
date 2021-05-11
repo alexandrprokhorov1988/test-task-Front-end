@@ -9,8 +9,10 @@ function Header({ cart }) {
     <header className="header">
       <div className="header__container">
         <div className="header__title-container">
-          <img src={headerLogo} className="header__logo" alt="Logo"/>
-          <h1 className="header__title">Front-end Developer Test Task</h1>
+          <a className="header__link" href="./">
+            <img src={headerLogo} className="header__logo" alt="Logo"/>
+            <p className="header__title">Front-end Developer Test Task</p>
+          </a>
         </div>
         <button className="header__button">cart
           <img src={buttonImg} alt="Cart"/>

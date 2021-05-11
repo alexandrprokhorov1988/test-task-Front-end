@@ -16,6 +16,7 @@
 @media print {
   .cart {
     grid-template-columns: auto;
+    box-shadow: none;
   }
 }
 
