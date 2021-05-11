@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/cart/static/css/main.a29845e4.chunk.css",
-    "main.js": "/cart/static/js/main.aa5cfe7d.chunk.js",
-    "main.js.map": "/cart/static/js/main.aa5cfe7d.chunk.js.map",
-    "runtime-main.js": "/cart/static/js/runtime-main.f2e1d232.js",
-    "runtime-main.js.map": "/cart/static/js/runtime-main.f2e1d232.js.map",
-    "static/js/2.46229b16.chunk.js": "/cart/static/js/2.46229b16.chunk.js",
-    "static/js/2.46229b16.chunk.js.map": "/cart/static/js/2.46229b16.chunk.js.map",
-    "static/js/3.422a8477.chunk.js": "/cart/static/js/3.422a8477.chunk.js",
-    "static/js/3.422a8477.chunk.js.map": "/cart/static/js/3.422a8477.chunk.js.map",
-    "index.html": "/cart/index.html",
-    "static/css/main.a29845e4.chunk.css.map": "/cart/static/css/main.a29845e4.chunk.css.map",
-    "static/js/2.46229b16.chunk.js.LICENSE.txt": "/cart/static/js/2.46229b16.chunk.js.LICENSE.txt",
-    "static/media/CustomerForm.css": "/cart/static/media/arrow.1239935b.svg",
-    "static/media/cart-icon.8aae5c46.svg": "/cart/static/media/cart-icon.8aae5c46.svg",
-    "static/media/Form.css": "/cart/static/media/secure.9aad40a6.svg",
-    "static/media/header-img.1a307a0b.svg": "/cart/static/media/header-img.1a307a0b.svg"
+    "main.css": "/cart/shipping/static/css/main.cb015524.chunk.css",
+    "main.js": "/cart/shipping/static/js/main.aa5cfe7d.chunk.js",
+    "main.js.map": "/cart/shipping/static/js/main.aa5cfe7d.chunk.js.map",
+    "runtime-main.js": "/cart/shipping/static/js/runtime-main.333419c8.js",
+    "runtime-main.js.map": "/cart/shipping/static/js/runtime-main.333419c8.js.map",
+    "static/js/2.2faf12cf.chunk.js": "/cart/shipping/static/js/2.2faf12cf.chunk.js",
+    "static/js/2.2faf12cf.chunk.js.map": "/cart/shipping/static/js/2.2faf12cf.chunk.js.map",
+    "static/js/3.422a8477.chunk.js": "/cart/shipping/static/js/3.422a8477.chunk.js",
+    "static/js/3.422a8477.chunk.js.map": "/cart/shipping/static/js/3.422a8477.chunk.js.map",
+    "index.html": "/cart/shipping/index.html",
+    "static/css/main.cb015524.chunk.css.map": "/cart/shipping/static/css/main.cb015524.chunk.css.map",
+    "static/js/2.2faf12cf.chunk.js.LICENSE.txt": "/cart/shipping/static/js/2.2faf12cf.chunk.js.LICENSE.txt",
+    "static/media/CustomerForm.css": "/cart/shipping/static/media/arrow.1239935b.svg",
+    "static/media/cart-icon.8aae5c46.svg": "/cart/shipping/static/media/cart-icon.8aae5c46.svg",
+    "static/media/Form.css": "/cart/shipping/static/media/secure.9aad40a6.svg",
+    "static/media/header-img.1a307a0b.svg": "/cart/shipping/static/media/header-img.1a307a0b.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.f2e1d232.js",
-    "static/js/2.46229b16.chunk.js",
-    "static/css/main.a29845e4.chunk.css",
+    "static/js/runtime-main.333419c8.js",
+    "static/js/2.2faf12cf.chunk.js",
+    "static/css/main.cb015524.chunk.css",
     "static/js/main.aa5cfe7d.chunk.js"
   ]
 }
