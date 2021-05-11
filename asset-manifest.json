@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "./static/css/main.40f84f93.chunk.css",
-    "main.js": "./static/js/main.aa5cfe7d.chunk.js",
-    "main.js.map": "./static/js/main.aa5cfe7d.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.062aaefd.js",
-    "runtime-main.js.map": "./static/js/runtime-main.062aaefd.js.map",
-    "static/js/2.10d2a441.chunk.js": "./static/js/2.10d2a441.chunk.js",
-    "static/js/2.10d2a441.chunk.js.map": "./static/js/2.10d2a441.chunk.js.map",
-    "static/js/3.422a8477.chunk.js": "./static/js/3.422a8477.chunk.js",
-    "static/js/3.422a8477.chunk.js.map": "./static/js/3.422a8477.chunk.js.map",
-    "index.html": "./index.html",
-    "static/css/main.40f84f93.chunk.css.map": "./static/css/main.40f84f93.chunk.css.map",
-    "static/js/2.10d2a441.chunk.js.LICENSE.txt": "./static/js/2.10d2a441.chunk.js.LICENSE.txt",
-    "static/media/CustomerForm.css": "./static/media/arrow.1239935b.svg",
-    "static/media/cart-icon.8aae5c46.svg": "./static/media/cart-icon.8aae5c46.svg",
-    "static/media/Form.css": "./static/media/secure.9aad40a6.svg",
-    "static/media/header-img.1a307a0b.svg": "./static/media/header-img.1a307a0b.svg"
+    "main.css": "/cart/static/css/main.a29845e4.chunk.css",
+    "main.js": "/cart/static/js/main.aa5cfe7d.chunk.js",
+    "main.js.map": "/cart/static/js/main.aa5cfe7d.chunk.js.map",
+    "runtime-main.js": "/cart/static/js/runtime-main.f2e1d232.js",
+    "runtime-main.js.map": "/cart/static/js/runtime-main.f2e1d232.js.map",
+    "static/js/2.46229b16.chunk.js": "/cart/static/js/2.46229b16.chunk.js",
+    "static/js/2.46229b16.chunk.js.map": "/cart/static/js/2.46229b16.chunk.js.map",
+    "static/js/3.422a8477.chunk.js": "/cart/static/js/3.422a8477.chunk.js",
+    "static/js/3.422a8477.chunk.js.map": "/cart/static/js/3.422a8477.chunk.js.map",
+    "index.html": "/cart/index.html",
+    "static/css/main.a29845e4.chunk.css.map": "/cart/static/css/main.a29845e4.chunk.css.map",
+    "static/js/2.46229b16.chunk.js.LICENSE.txt": "/cart/static/js/2.46229b16.chunk.js.LICENSE.txt",
+    "static/media/CustomerForm.css": "/cart/static/media/arrow.1239935b.svg",
+    "static/media/cart-icon.8aae5c46.svg": "/cart/static/media/cart-icon.8aae5c46.svg",
+    "static/media/Form.css": "/cart/static/media/secure.9aad40a6.svg",
+    "static/media/header-img.1a307a0b.svg": "/cart/static/media/header-img.1a307a0b.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.062aaefd.js",
-    "static/js/2.10d2a441.chunk.js",
-    "static/css/main.40f84f93.chunk.css",
+    "static/js/runtime-main.f2e1d232.js",
+    "static/js/2.46229b16.chunk.js",
+    "static/css/main.a29845e4.chunk.css",
     "static/js/main.aa5cfe7d.chunk.js"
   ]
 }
