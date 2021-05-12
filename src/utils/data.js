@@ -2,7 +2,6 @@ import img1 from '../images/cartImg1.png';
 import img2 from '../images/cartImg2.png';
 import img3 from '../images/cartImg3.png';
 
-
 const cart = [
   {
     id: 1,
@@ -315,7 +314,51 @@ const country = [
   { name: 'Zimbabwe', code: 'ZW' }
 ];
 
+const paymentSystems = {
+  20: 'mir',
+  21: 'mir',
+  22: 'mir',
+  23: 'mir',
+  24: 'mir',
+  25: 'mir',
+  26: 'mir',
+  27: 'mir',
+  28: 'mir',
+  29: 'mir',
+  30: 'diners',
+  36: 'diners',
+  38: 'diners',
+  31: 'jsb',
+  35: 'jsb',
+  34: 'american-express',
+  37: 'american-express',
+  40: 'visa',
+  41: 'visa',
+  42: 'visa',
+  43: 'visa',
+  44: 'visa',
+  45: 'visa',
+  46: 'visa',
+  47: 'visa',
+  48: 'visa',
+  49: 'visa',
+  50: 'maestro',
+  56: 'maestro',
+  57: 'maestro',
+  58: 'maestro',
+  51: 'mastercard',
+  52: 'mastercard',
+  53: 'mastercard',
+  54: 'mastercard',
+  55: 'mastercard',
+  60: 'discover',
+  62: 'unionpay',
+  63: 'maestro',
+  67: 'maestro'
+};
+
 export {
   cart,
-  country
+  country,
+  paymentSystems,
 };

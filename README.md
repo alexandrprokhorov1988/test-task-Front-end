@@ -48,7 +48,7 @@
 * [Оптимизация картинок svg](https://jakearchibald.github.io/svgomg/)  
 * [Валидация HTML](https://validator.w3.org/) 
 * [Валидация CSS](https://jigsaw.w3.org/css-validator/) 
+* Автоопределение карты пользователя
 
 #### <a name="planes">Планы по доработке</a>
-* Добавить автоопределение карты пользователя
-
+* Сделать custom select

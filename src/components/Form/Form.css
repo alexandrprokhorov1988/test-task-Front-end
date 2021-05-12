@@ -131,6 +131,58 @@
   max-width: 100px;
 }
 
+.form__input-payment {
+  width: 60px;
+  height: 40px;
+  position: absolute;
+  right: 20px;
+  top: 6px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50%;
+  display: none;
+}
+
+.form__input-payment_active {
+  display: block;
+}
+
+.form__input-payment-visa {
+  background-image: url(../../images/visa-card.svg);
+}
+
+.form__input-payment-mir {
+  background-image: url(../../images/mir-card.svg);
+}
+
+.form__input-payment-mastercard {
+  background-image: url(../../images/mastercard-card.svg);
+}
+
+.form__input-payment-maestro {
+  background-image: url(../../images/maestro-card.svg);
+}
+
+.form__input-payment-diners {
+  background-image: url(../../images/diners_club-card.svg);
+}
+
+.form__input-payment-jsb {
+  background-image: url(../../images/JCB-card.svg);
+}
+
+.form__input-payment-unionpay {
+  background-image: url(../../images/unionpay-card.svg);
+}
+
+.form__input-payment-discover {
+  background-image: url(../../images/discover-card.svg);
+}
+
+.form__input-payment-american-express {
+  background-image: url(../../images/american-expres-card.svg);
+}
+
 .form__select {
   max-width: 180px;
   padding-left: 13px;
@@ -237,7 +289,8 @@
     padding-right: 3%;
     padding-left: 3%;
   }
-  .form__error{
+
+  .form__error {
     left: -5px;
   }
 }

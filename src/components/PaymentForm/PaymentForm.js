@@ -2,20 +2,30 @@ import React from 'react';
 import {useHistory} from 'react-router-dom';
 import {useFormValidation} from '../../hooks/useFormValidation';
 import Form from '../../components/Form/From';
-import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import {paymentSystems} from "../../utils/data";
 
 function PaymentForm({ formValid, onHandleValid, onOrderComplete, onSingleFormSubmit, path }) {
   const { values, handleChange, errors, isValid } = useFormValidation();
   const history = useHistory();
+  const [paymentSystem, setPaymentSystem] = React.useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
-    if(isValid && formValid.shipping && formValid.billing){
+    if (isValid && formValid.shipping && formValid.billing) {
       onSingleFormSubmit(values);
+      setPaymentSystem('');
       onOrderComplete();
       history.push(path);
     }
   }
+
+  React.useEffect(() => {
+    if (values.cardNumber) {
+      setPaymentSystem(paymentSystems[values.cardNumber.substring(0, 2)]);
+    } else {
+      setPaymentSystem('');
+    }
+  }, [values]);
 
   return (
     <Form
@@ -57,6 +67,10 @@ function PaymentForm({ formValid, onHandleValid, onOrderComplete, onSingleFormSu
               pattern="^\d+$"
               value={values.cardNumber || ''}
               onChange={handleChange}
+            />
+            <span className={`form__input-payment ${paymentSystem ?
+              `form__input-payment-${paymentSystem} form__input-payment_active` :
+              ''}`}
             />
           </div>
         </label>
@@ -102,7 +116,6 @@ function PaymentForm({ formValid, onHandleValid, onOrderComplete, onSingleFormSu
         >Pay Securely
         </button>
       </div>
-
     </Form>
   )
 }
